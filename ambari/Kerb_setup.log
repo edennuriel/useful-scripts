@@ -1,0 +1,592 @@
+
+2018-11-02,23:37:51 Installing kerberos RPMs
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+
+2018-11-02,23:37:56 Adding KERBEROS Service to cluster
+
+2018-11-02,23:37:56 Adding KERBEROS_CLIENT component to the KERBEROS service
+
+2018-11-02,23:39:56 Adding KERBEROS Service to cluster
+
+2018-11-02,23:39:56 Adding KERBEROS_CLIENT component to the KERBEROS service
+
+ 2018-11-02,23:39:58 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:39:58 Installing the KERBEROS service and components
+
+2018-11-02,23:39:58 Sleeping for 1 minute
+
+2018-11-02,23:43:10 Adding KERBEROS Service to cluster
+
+2018-11-02,23:43:10 Adding KERBEROS_CLIENT component to the KERBEROS service
+
+ 2018-11-02,23:43:12 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:43:12 Installing the KERBEROS service and components
+
+2018-11-02,23:43:12 Sleeping for 1 minute
+
+2018-11-02,23:45:52 Adding KERBEROS Service to cluster
+HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>
+2018-11-02,23:45:52 Adding KERBEROS_CLIENT component to the KERBEROS service
+HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>
+ 2018-11-02,23:45:54 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:45:54 Installing the KERBEROS service and components
+HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>
+2018-11-02,23:45:54 Sleeping for 1 minute
+
+2018-11-02,23:46:49 Adding KERBEROS Service to cluster
+HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>
+2018-11-02,23:46:49 Adding KERBEROS_CLIENT component to the KERBEROS service
+HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>
+ 2018-11-02,23:46:52 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:46:52 Installing the KERBEROS service and components
+HTTP/1.1 400 Illegal character VCHAR='"'
+Content-Type: text/html;charset=iso-8859-1
+Content-Length: 70
+Connection: close
+
+<h1>Bad Message 400</h1><pre>reason: Illegal character VCHAR='"'</pre>
+2018-11-02,23:46:52 Sleeping for 1 minute
+
+2018-11-02,23:47:15 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:47:15 Adding KERBEROS_CLIENT component to the KERBEROS service
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-02,23:47:18 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:47:18 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:47:18 Sleeping for 1 minute
+
+2018-11-02,23:48:24 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:48:24 Adding KERBEROS_CLIENT component to the KERBEROS service
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-02,23:48:26 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:48:26 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:48:26 Sleeping for 1 minute
+
+2018-11-02,23:55:56 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:55:56 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-02,23:55:56 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:55:56 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:55:56 Sleeping for 1 minute
+-> 60
+
+2018-11-02,23:55:56 Stopping all the services
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-02,23:55:56 Sleeping for 3 minutes
+-> 180
+
+2018-11-02,23:55:56 Enabling Kerberos
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+2018-11-02,23:55:56 Starting all services after 2 minutes..Please be patient :)
+-> 120
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "STARTED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-02,23:55:56 Please check Ambari UI
+Thank You! :)
+
+2018-11-02,23:59:33 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:59:33 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-02,23:59:33 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:59:33 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:59:33 Sleeping for 1 minute
+-> 60
+
+2018-11-02,23:59:33 Stopping all the services
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-02,23:59:33 Sleeping for 3 minutes
+-> 180
+
+2018-11-02,23:59:33 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-02,23:59:33 Enabling Kerberos
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+2018-11-02,23:59:34 Starting all services after 2 minutes..Please be patient :)
+-> 120
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "STARTED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-02,23:59:34 Please check Ambari UI
+Thank You! :)
+
+2018-11-02,23:59:59 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:59:59 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+[
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "krb5-conf",
+        "tag": "version1",
+        "properties": {
+          "domains":"",
+          "manage_krb5_conf": "true",
+          "conf_dir":"/etc",
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/ [libdefaults] renew_lifetime = 7d forwardable = true default_realm = {{realm}} ticket_lifetime = 24h dns_lookup_realm = false dns_lookup_kdc = false rdns = false dns_canonicalize_hostname = false default_ccache_name = /tmp/krb5cc_%{uid} #default_tgs_enctypes = {{encryption_types}} #default_tkt_enctypes = {{encryption_types}} {% if domains %} [domain_realm] {%- for domain in domains.split(',') %} {{domain|trim()}} = {{realm}} {%- endfor %} {% endif %} [logging] default = FILE:/var/log/krb5kdc.log admin_server = FILE:/var/log/kadmind.log kdc = FILE:/var/log/krb5kdc.log [realms] {{realm}} = { {%- if master_kdc %} master_kdc = {{master_kdc|trim()}} {%- endif -%} {%- if kdc_hosts > 0 -%} {%- set kdc_host_list = kdc_hosts.split(',') -%} {%- if kdc_host_list and kdc_host_list|length > 0 %} admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}} {%- if kdc_host_list -%} {%- if master_kdc and (master_kdc not in kdc_host_list) %} kdc = {{master_kdc|trim()}} {%- endif -%} {% for kdc_host in kdc_host_list %} kdc = {{kdc_host|trim()}} {%- endfor -%} {% endif %} {%- endif %} {%- endif %} kpasswd_server = {{master_kdc|trim()}}:464 default_domain = {{domains.split(',')[0]|trim()}} pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem } {# Append additional realm declarations below #}"
+        }
+      }
+    }
+  },
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "kerberos-env",
+        "tag": "version1",
+        "properties": {
+          "kdc_type": "kdc-ipa",
+          "manage_identities": "true",
+          "install_packages": "true",
+          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
+          "realm" : "FIELD.HORTONWORKS.COM",
+          "kdc_hosts" : "enctrl.field.hortonworks.com",
+          "kdc_host" : "enctrl.field.hortonworks.com",
+          "admin_server_host" : "enctrl.field.hortonworks.com",
+          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
+          "password_length": "20",
+          "password_min_lowercase_letters": "1",
+          "password_min_uppercase_letters": "1",
+          "password_min_digits": "1",
+          "password_min_punctuation": "1",
+          "password_min_whitespace": "0",
+          "service_check_principal_name" : "-",
+          "case_insensitive_username_rules" : "false"
+        }
+      }
+    }
+  }
+]
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-02,23:59:59 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-02,23:59:59 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-02,23:59:59 Sleeping for 1 minute
+-> 60
+
+2018-11-02,23:59:59 Stopping all the services
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-02,23:59:59 Sleeping for 3 minutes
+-> 180
+
+2018-11-02,23:59:59 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-02,23:59:59 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin/admin",
+      "password" : "hadoop"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+2018-11-02,23:59:59 Starting all services after 2 minutes..Please be patient :)
+-> 120
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "STARTED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-02,23:59:59 Please check Ambari UI
+Thank You! :)
+
+2018-11-03,00:00:49 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-03,00:00:49 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+[
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "krb5-conf",
+        "tag": "version1",
+        "properties": {
+          "domains":"",
+          "manage_krb5_conf": "true",
+          "conf_dir":"/etc",
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/ [libdefaults] renew_lifetime = 7d forwardable = true default_realm = {{realm}} ticket_lifetime = 24h dns_lookup_realm = false dns_lookup_kdc = false rdns = false dns_canonicalize_hostname = false default_ccache_name = /tmp/krb5cc_%{uid} #default_tgs_enctypes = {{encryption_types}} #default_tkt_enctypes = {{encryption_types}} {% if domains %} [domain_realm] {%- for domain in domains.split(',') %} {{domain|trim()}} = {{realm}} {%- endfor %} {% endif %} [logging] default = FILE:/var/log/krb5kdc.log admin_server = FILE:/var/log/kadmind.log kdc = FILE:/var/log/krb5kdc.log [realms] {{realm}} = { {%- if master_kdc %} master_kdc = {{master_kdc|trim()}} {%- endif -%} {%- if kdc_hosts > 0 -%} {%- set kdc_host_list = kdc_hosts.split(',') -%} {%- if kdc_host_list and kdc_host_list|length > 0 %} admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}} {%- if kdc_host_list -%} {%- if master_kdc and (master_kdc not in kdc_host_list) %} kdc = {{master_kdc|trim()}} {%- endif -%} {% for kdc_host in kdc_host_list %} kdc = {{kdc_host|trim()}} {%- endfor -%} {% endif %} {%- endif %} {%- endif %} kpasswd_server = {{master_kdc|trim()}}:464 default_domain = {{domains.split(',')[0]|trim()}} pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem } {# Append additional realm declarations below #}"
+        }
+      }
+    }
+  },
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "kerberos-env",
+        "tag": "version1",
+        "properties": {
+          "kdc_type": "kdc-ipa",
+          "manage_identities": "true",
+          "install_packages": "true",
+          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
+          "realm" : "FIELD.HORTONWORKS.COM",
+          "kdc_hosts" : "enctrl.field.hortonworks.com",
+          "kdc_host" : "enctrl.field.hortonworks.com",
+          "admin_server_host" : "enctrl.field.hortonworks.com",
+          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
+          "password_length": "20",
+          "password_min_lowercase_letters": "1",
+          "password_min_uppercase_letters": "1",
+          "password_min_digits": "1",
+          "password_min_punctuation": "1",
+          "password_min_whitespace": "0",
+          "service_check_principal_name" : "-",
+          "case_insensitive_username_rules" : "false"
+        }
+      }
+    }
+  }
+]
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-03,00:00:49 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-03,00:00:49 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-03,00:00:49 Sleeping for 1 minute
+-> 60
+
+2018-11-03,00:00:49 Stopping all the services
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-03,00:00:49 Sleeping for 3 minutes
+-> 180
+
+2018-11-03,00:00:49 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-03,00:00:49 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin/admin",
+      "password" : "hadoop"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+2018-11-03,00:00:49 Starting all services after 2 minutes..Please be patient :)
+-> 120
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "STARTED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-03,00:00:49 Please check Ambari UI
+Thank You! :)
+
+2018-11-03,00:00:59 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-03,00:00:59 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+[
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "krb5-conf",
+        "tag": "version1",
+        "properties": {
+          "domains":"",
+          "manage_krb5_conf": "true",
+          "conf_dir":"/etc",
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/ [libdefaults] renew_lifetime = 7d forwardable = true default_realm = {{realm}} ticket_lifetime = 24h dns_lookup_realm = false dns_lookup_kdc = false rdns = false dns_canonicalize_hostname = false default_ccache_name = /tmp/krb5cc_%{uid} #default_tgs_enctypes = {{encryption_types}} #default_tkt_enctypes = {{encryption_types}} {% if domains %} [domain_realm] {%- for domain in domains.split(',') %} {{domain|trim()}} = {{realm}} {%- endfor %} {% endif %} [logging] default = FILE:/var/log/krb5kdc.log admin_server = FILE:/var/log/kadmind.log kdc = FILE:/var/log/krb5kdc.log [realms] {{realm}} = { {%- if master_kdc %} master_kdc = {{master_kdc|trim()}} {%- endif -%} {%- if kdc_hosts > 0 -%} {%- set kdc_host_list = kdc_hosts.split(',') -%} {%- if kdc_host_list and kdc_host_list|length > 0 %} admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}} {%- if kdc_host_list -%} {%- if master_kdc and (master_kdc not in kdc_host_list) %} kdc = {{master_kdc|trim()}} {%- endif -%} {% for kdc_host in kdc_host_list %} kdc = {{kdc_host|trim()}} {%- endfor -%} {% endif %} {%- endif %} {%- endif %} kpasswd_server = {{master_kdc|trim()}}:464 default_domain = {{domains.split(',')[0]|trim()}} pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem } {# Append additional realm declarations below #}"
+        }
+      }
+    }
+  },
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "kerberos-env",
+        "tag": "version1",
+        "properties": {
+          "kdc_type": "kdc-ipa",
+          "manage_identities": "true",
+          "install_packages": "true",
+          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
+          "realm" : "FIELD.HORTONWORKS.COM",
+          "kdc_hosts" : "enctrl.field.hortonworks.com",
+          "kdc_host" : "enctrl.field.hortonworks.com",
+          "admin_server_host" : "enctrl.field.hortonworks.com",
+          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
+          "password_length": "20",
+          "password_min_lowercase_letters": "1",
+          "password_min_uppercase_letters": "1",
+          "password_min_digits": "1",
+          "password_min_punctuation": "1",
+          "password_min_whitespace": "0",
+          "service_check_principal_name" : "-",
+          "case_insensitive_username_rules" : "false"
+        }
+      }
+    }
+  }
+]
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-03,00:00:59 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-03,00:00:59 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-03,00:00:59 Sleeping for 1 minute
+-> 60
+
+2018-11-03,00:00:59 Stopping all the services
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-03,00:00:59 Sleeping for 3 minutes
+-> 180
+
+2018-11-03,00:00:59 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-03,00:00:59 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin/admin",
+      "password" : "hadoop"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+2018-11-03,00:00:59 Starting all services after 2 minutes..Please be patient :)
+-> 120
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "STARTED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-03,00:00:59 Please check Ambari UI
+Thank You! :)
+
+2018-11-03,00:01:53 Adding KERBEROS Service to cluster
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-03,00:01:53 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS/components/KERBEROS_CLIENT
+[
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "krb5-conf",
+        "tag": "version1",
+        "properties": {
+          "domains":"",
+          "manage_krb5_conf": "true",
+          "conf_dir":"/etc",
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/
+
+[libdefaults]
+  renew_lifetime = 7d
+  forwardable = true
+  default_realm = {{realm}}
+  ticket_lifetime = 24h
+  dns_lookup_realm = false
+  dns_lookup_kdc = false
+  rdns = false
+  dns_canonicalize_hostname = false
+  default_ccache_name = /tmp/krb5cc_%{uid}
+  #default_tgs_enctypes = {{encryption_types}}
+  #default_tkt_enctypes = {{encryption_types}}
+
+{% if domains %}
+[domain_realm]
+{%- for domain in domains.split(',') %}
+  {{domain|trim()}} = {{realm}}
+{%- endfor %}
+{% endif %}
+
+[logging]
+  default = FILE:/var/log/krb5kdc.log
+  admin_server = FILE:/var/log/kadmind.log
+  kdc = FILE:/var/log/krb5kdc.log
+
+[realms]
+  {{realm}} = {
+{%- if master_kdc %}
+    master_kdc = {{master_kdc|trim()}}
+{%- endif -%}
+{%- if kdc_hosts > 0 -%}
+{%- set kdc_host_list = kdc_hosts.split(',')  -%}
+{%- if kdc_host_list and kdc_host_list|length > 0 %}
+    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}
+{%- if kdc_host_list -%}
+{%- if master_kdc and (master_kdc not in kdc_host_list) %}
+    kdc = {{master_kdc|trim()}}
+{%- endif -%}
+{% for kdc_host in kdc_host_list %}
+    kdc = {{kdc_host|trim()}}
+{%- endfor -%}
+{% endif %}
+{%- endif %}
+{%- endif %}
+  kpasswd_server =  {{master_kdc|trim()}}:464
+  default_domain = {{domains.split(',')[0]|trim()}}
+  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem
+  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem
+  }
+
+{# Append additional realm declarations below #}"
+        }
+      }
+    }
+  },
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "kerberos-env",
+        "tag": "version1",
+        "properties": {
+          "kdc_type": "kdc-ipa",
+          "manage_identities": "true",
+          "install_packages": "true",
+          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
+          "realm" : "FIELD.HORTONWORKS.COM",
+          "kdc_hosts" : "enctrl.field.hortonworks.com",
+          "kdc_host" : "enctrl.field.hortonworks.com",
+          "admin_server_host" : "enctrl.field.hortonworks.com",
+          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
+          "password_length": "20",
+          "password_min_lowercase_letters": "1",
+          "password_min_uppercase_letters": "1",
+          "password_min_digits": "1",
+          "password_min_punctuation": "1",
+          "password_min_whitespace": "0",
+          "service_check_principal_name" : "-",
+          "case_insensitive_username_rules" : "false"
+        }
+      }
+    }
+  }
+]
+-> 1
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+ 2018-11-03,00:01:53 Creating the KERBEROS_CLIENT host components for each host
+
+2018-11-03,00:01:53 Installing the KERBEROS service and components
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services/KERBEROS
+
+2018-11-03,00:01:53 Sleeping for 1 minute
+-> 60
+
+2018-11-03,00:01:53 Stopping all the services
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "INSTALLED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-03,00:01:53 Sleeping for 3 minutes
+-> 180
+
+2018-11-03,00:01:53 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-03,00:01:53 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin/admin",
+      "password" : "hadoop"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d @/tmp/useful-scripts/ambari/payload https://172.26.223.100:8444/api/v1/clusters/enseclab
+
+2018-11-03,00:01:53 Starting all services after 2 minutes..Please be patient :)
+-> 120
+curl -k -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d {"ServiceInfo": {"state" : "STARTED"}} https://172.26.223.100:8444/api/v1/clusters/enseclab/services
+
+2018-11-03,00:01:53 Please check Ambari UI
+Thank You! :)

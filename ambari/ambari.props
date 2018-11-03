@@ -1,10 +1,12 @@
-CLUSTER_NAME=Sandbox
+CLUSTER_NAME=enseclab
 AMBARI_ADMIN_USER=admin
-AMBARI_ADMIN_PASSWORD=admin
-AMBARI_HOST=sandbox.hortonworks.com
-KDC_HOST=sandbox.hortonworks.com
-REALM=HWX.COM
-KERBEROS_CLIENTS=sandbox.hortonworks.com
+AMBARI_ADMIN_PASSWORD=admin1234
+AMBARI_HOST=172.26.223.100
+AMBARI_PORT=8444
+AMBARI_BASE_URL=https://${AMBARI_HOST}:${AMBARI_PORT}
+KDC_HOST=enctrl.field.hortonworks.com
+REALM=FIELD.HORTONWORKS.COM
+KERBEROS_CLIENTS=
 
 ##### Notes #####
 #1. KERBEROS_CLIENTS - Comma separated list of Kerberos clients in case of multinode cluster

@@ -1,0 +1,11 @@
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin/admin",
+      "password" : "hadoop"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}

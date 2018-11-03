@@ -1,0 +1,33 @@
+[libdefaults]
+  renew_lifetime = 7d
+  forwardable= true
+  default_realm = {{realm|upper()}}
+  ticket_lifetime = 24h
+  dns_lookup_realm = false
+  dns_lookup_kdc = false
+  #default_tgs_enctypes = {{encryption_types}}
+  #def
+ault_tkt_enctypes ={{encryption_types}}
+
+{% if domains %}
+[domain_realm]
+{% for domain in domains.split(',') %}
+  {{domain}} = {{realm|upper()}}
+{% endfor %}
+{%endif %}
+
+[logging]
+  default = FILE:/var/log/krb5kdc.log
+admin_server = FILE:/var/l
+og/kadmind.log
+  kdc = FILE:/var/log/krb5kdc.log
+
+[realms]
+  {{realm}} = {
+    admin_server = {{admin_server_host|default(kdc_host, True)}}
+    kdc = {{kdc_host}}
+ }
+
+{# Append additional realm declarations below #}
+
+
