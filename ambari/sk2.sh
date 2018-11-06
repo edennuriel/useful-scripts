@@ -11,8 +11,8 @@ AMBARI_VERSION=`rpm -qa|grep 'ambari-server-'|head -1|cut -d'-' -f3`
 CONTENT="$(<krbipa)"
 KDC_TYPE="ipa"
 CURLOPTS='-s'
-#sleep="echo -> "
-sleep="sleep "
+sleep="echo -> "
+#sleep="sleep "
 #############
 
 ambcli() {
@@ -20,22 +20,22 @@ ambcli() {
   API="${2:-clusters/$CLUSTER_NAME}"
   PAYLOAD="${3:+ -d '"$3"'}"
   AMBCLI='curl   -k -H  "X-Requested-By:ambari" "${CURLOPTS}" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD '
-  echo "${AMBCLI} -X ${METHOD} "${AMBARI_BASE_URL}/api/v1/$API" "${PAYLOAD}""
+  echo "${AMBCLI} -X ${METHOD} "${AMBARI_BASE_URL}/api/v1/$API" "${PAYLOAD}"" >> rest.log
   eval "${AMBCLI} -X ${METHOD} "${AMBARI_BASE_URL}/api/v1/$API" "${PAYLOAD}""
 }
 
 ambpost() {
-  CURLOPTS="-i"
+  CURLOPTS="-s"
   ambcli POST "$1" "$2"
 }
 
 ambput() {
-  CURLOPTS="-i"
+  CURLOPTS="-s"
   ambcli PUT "$1" "$2"
 }
 
 ambget() {
-  CURLOPTS="-i"
+  CURLOPTS="-s"
   ambcli GET "$1" 
 }
 
@@ -44,7 +44,19 @@ ambgets() {
   ambcli GET "$1"
 }
 
-#KERBEROS_CLIENTS=$(ambgets hosts |  jq -r '[.items[].Hosts.host_name]|join (", ")')
+KERBEROS_CLIENTS=$(ambgets hosts |  jq -r '[.items[].Hosts.host_name]|join (", ")')
+ambsrv() {
+  OP=${1:-status}
+  shift
+  case "$OP" in
+  add )
+    ambpost clusters/$CLUSTER_NAME/services/$1 
+  ;;
+  * )
+    echo Usage: ambsrv add/remove/start/stop/status service_name 
+  ;;
+  esac
+}
 
 ts()
 {
@@ -121,28 +133,29 @@ create_payload()
       }
     }
   }
-]" | tee $LOC/payload
+]" | sed ':a;N;$!ba;s/\n/\\n/g' | tee $LOC/payload
 
 	elif [ "$1" == credentials ]
 	then
 		echo "{
   \"session_attributes\" : {
     \"kerberos_admin\" : {
-      \"principal\" : \"admin/admin\",
-      \"password\" : \"hadoop\"
+      \"principal\" : \"$KDC_ADMIN\",
+      \"password\" : \"$KDC_ADMIN_PASS\"
     }
   },
   \"Clusters\": {
     \"security_type\" : \"KERBEROS\"
   }
-}" |tee $LOC/payload
+}" | sed ':a;N;$!ba;s/\n/\\n/g' | tee $LOC/payload
 	fi
+  cat $LOC/payload >> rest.log
 }
 
 configure_kerberos()
 {
 	echo -e "\n`ts` Adding KERBEROS Service to cluster"
-	ambpost clusters/$CLUSTER_NAME/services/KERBEROS
+	ambsrv add KERBEROS
 	echo -e "\n`ts` Adding KERBEROS_CLIENT component to the KERBEROS service"
 	$sleep 1
 	ambpost clusters/$CLUSTER_NAME/services/KERBEROS/components/KERBEROS_CLIENT

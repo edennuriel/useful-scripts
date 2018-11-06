@@ -7,6 +7,8 @@ AMBARI_BASE_URL="https://${AMBARI_HOST}:${AMBARI_PORT}"
 KDC_HOST=enctrl.field.hortonworks.com
 #todo get the list of hosts from ambari
 REALM=FIELD.HORTONWORKS.COM
+KDC_ADMIN=admin
+KDC_ADMIN_PASS=admin1234
 #KERBEROS_CLIENTS=
 
 ##### Notes #####

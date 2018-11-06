@@ -1,8 +1,8 @@
 {
   "session_attributes" : {
     "kerberos_admin" : {
-      "principal" : "admin/admin",
-      "password" : "hadoop"
+      "principal" : "admin",
+      "password" : "admin1234"
     }
   },
   "Clusters": {
