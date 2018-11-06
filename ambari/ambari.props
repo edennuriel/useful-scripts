@@ -3,10 +3,11 @@ AMBARI_ADMIN_USER=admin
 AMBARI_ADMIN_PASSWORD=admin1234
 AMBARI_HOST=172.26.223.100
 AMBARI_PORT=8444
-AMBARI_BASE_URL=https://${AMBARI_HOST}:${AMBARI_PORT}
+AMBARI_BASE_URL="https://${AMBARI_HOST}:${AMBARI_PORT}"
 KDC_HOST=enctrl.field.hortonworks.com
+#todo get the list of hosts from ambari
 REALM=FIELD.HORTONWORKS.COM
-KERBEROS_CLIENTS=
+#KERBEROS_CLIENTS=
 
 ##### Notes #####
 #1. KERBEROS_CLIENTS - Comma separated list of Kerberos clients in case of multinode cluster

@@ -8,10 +8,16 @@ PROP=ambari.props
 source $LOC/$PROP
 AMBARI_VERSION=`rpm -qa|grep 'ambari-server-'|head -1|cut -d'-' -f3`
 CONTENT="$(<krbipa)"
-KDC_TYPE=kdc-ipa
-AMBCLI='echo curl -k -H  "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X '
+KDC_TYPE="ipa"
+AMBCLI='curl -s -k -H  "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -X '
 sleep="echo -> "
 #############
+
+ambgets() {
+  eval "${AMBCLI} GET "${AMBARI_BASE_URL}/api/v1/$1""
+}
+
+KERBEROS_CLIENTS=$(ambgets hosts |  jq -r '[.items[].Hosts.host_name]|join (", ")')
 
 ts()
 {
