@@ -6,9 +6,10 @@
 #AMBARI_VERSION=`rpm -qa|grep 'ambari-server-'|head -1|cut -d'-' -f3`
 
 source $LOC/ambcli.sh
-AMBARI_VERSION="$(ambget services/AMBARI/components/AMBARI_SERVER?fields=RootServiceComponents/component_version | jq -r '.RootServiceComponent
-s| select (.component_name=="AMBARI_SERVER")|.component_version')"
-export AMBARI_VERSION ; echo $AMBARI_VERSION
+AMBARI_VERSION="$(ambget services/AMBARI/components/AMBARI_SERVER?fields=RootServiceComponents/component_version | jq -r '.RootServiceComponents| select (.component_name=="AMBARI_SERVER")|.component_version')"
+export AMBARI_VERSION ; echo AMBARI_VERSION=$AMBARI_VERSION
+[[ -z $KERBEROS_CLIENTS ]] && KERBEROS_CLIENTS=$(ambgets hosts |  jq -r '[.items[].Hosts.host_name]|join (", ")')
+echo "KERBEROS CLIENTS WILL BE INSTALLED ON $KERBEROS_CLIENTS"
 
 setup_kdc()
 {
@@ -19,17 +20,18 @@ setup_kdc()
 	sed -i.bak "s/EXAMPLE.COM/$REALM/g" $LOC/krb5.conf.default
 	sed -i.bak "s/kerberos.example.com/$KDC_HOST/g" $LOC/krb5.conf.default
 	cat $LOC/krb5.conf.default > /etc/krb5.conf
-	kdb5_util create -s -P hadoop
+	kdb5_util create -s -P $KDC_ADMIN_PASS
 	echo -e "\n`ts` Starting KDC services"
 	service krb5kdc start
 	service kadmin start
 	chkconfig krb5kdc on
 	chkconfig kadmin on
 	echo -e "\n`ts` Creating admin principal"
-	kadmin.local -q "addprinc -pw hadoop admin/admin"
+	kadmin.local -q "addprinc -pw $KDC_ADMIN_PASS $KDC_ADMIN"
 	sed -i.bak "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kadm5.acl
 	echo -e "\n`ts` Restarting kadmin"
 	service kadmin restart
+	
 }
 
 create_payload()
@@ -43,7 +45,7 @@ create_payload()
     \"Clusters\": {
       \"desired_config\": {
         \"type\": \"krb5-conf\",
-        \"tag\": \"version10\",
+        \"tag\": \"version1\",
         \"properties\": {
           \"domains\":\"'$DOMAINS'\",
           \"manage_krb5_conf\": \"true\",
@@ -87,7 +89,7 @@ create_payload()
 		echo "{
   \"session_attributes\" : {
     \"kerberos_admin\" : {
-      \"principal\" : \"$KDC_ADMIN\",
+      \"principal\" : \"${KDC_ADMIN}@${REALM}\",
       \"password\" : \"$KDC_ADMIN_PASS\"
     }
   },
@@ -133,7 +135,7 @@ create_krb_cred() {
 	if [[ "${AMBARI_VERSION:0:3}" > "2.7" ]] || [[ "${AMBARI_VERSION:0:3}" == "2.7" ]]
         then
                 echo -e "\n`ts` Uploading Kerberos Credentials"
-                ambpost clusters/$CLUSTER_NAME/credentials/kdc.admin.credential '{ "Credential" : { "principal" : "admin/admin@'$REALM'", "key" : "hadoop", "type" : "temporary" }}' 
+                ambpost clusters/${CLUSTER_NAME}/credentials/kdc.admin.credential '{ "Credential" : { "principal" : "'$KDC_ADMIN'@'$REALM'", "key" : "'$KDC_ADMIN_PASS'", "type" : "temporary" }}' 
                 $sleep 1
         else
 			echo -e "\n`ts` Ambari post 2.7 version does not allow saving credentials"
@@ -141,17 +143,22 @@ create_krb_cred() {
 
 }
 
+enable_kerberos(){
+
+  amb srv stop all
+  echo -e "\n`ts` Enabling Kerberos"
+  create_payload credentials
+  ambput clusters/$CLUSTER_NAME @$LOC/payload
+  amb srv start all
+
+}
 configure_kerberos()
 {
   conf_krb_service
   conf_krb_clients
   install_kerberos
   create_krb_cred
-	amb srv stop all
-  echo -e "\n`ts` Enabling Kerberos"
-	create_payload credentials
-	ambput clusters/$CLUSTER_NAME @$LOC/payload 
-	amb srv start all
+  enable_kerberos
 }
 
 [[ ! -z $SETUPKDC ]] && setup_kdc|tee -a $LOC/Kerb_setup.log

@@ -1,7 +1,0 @@
-{
-  "href": "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/69",
-  "Requests": {
-    "id": 69,
-    "status": "Accepted"
-  }
-}

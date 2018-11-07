@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 #Script to setup kerberos in one click! :)
 #Author - Kuldeep Kulkarni (http://crazyadmins.com)
 #############
@@ -11,6 +11,8 @@ CURLOPTS='-s'
 sleep="sleep "
 #############
 
+declare -A states 
+for l in $(awk -F, '! /^#/ { if ($1~"s" ) { printf "states[%s]=%s\n",$1,$2;}}' states.csv); do eval "$l" ; echo "evaluating $l" ; done
 
 ambcli() {
   METHOD=${1:-GET}
@@ -46,6 +48,10 @@ ambgets() {
   ambcli GET "$1"
 }
 
+ambservices() {
+  amb srv ls|jq -r '.items[].ServiceInfo.service_name' > /tmp/amb.svc
+}
+ 
 progress() {
     ambget clusters/$CLUSTER_NAME/requests/$request_id | grep progress_percent | awk '{print $3}' | cut -d . -f 1
 }
@@ -62,6 +68,14 @@ waitFor() {
     done
 }
 
+ambsrvact() {
+     op=${1}
+     service="${2/all/}"
+     state=${states[$op]}
+     [[ ! -z $service ]] && [[ -f /tmp/amb.svc ]] && service=$(grep -i $service /tmp/amb.svc)
+     echo $(ambput clusters/$CLUSTER_NAME/services${service:+/$service} '{"RequestInfo": {"context" :"'"Putting $service Services in $state state"'"}, "ServiceInfo": {"state" : "'"$state"'"}}' | awk '/id/{print $3}'|cut -d',' -f1)
+}
+
 amb() {
   ambsubcmd=$1;
   shift
@@ -72,11 +86,9 @@ amb() {
     ls )
       ambget clusters/$CLUSTER_NAME/services #jq -r '.items[].ServiceInfo.service_name'
     ;; 
-    start )
-     service="${2/all/}"
-     state="STARTED"
-     request_id=$(ambput clusters/$CLUSTER_NAME/services${service+/$service} '{"RequestInfo": {"context" :"'"Putting $2 Services in $state state"'"}, "ServiceInfo": {"state" : "'"$state"'"}}' | awk '/id/{print $3}'|cut -d',' -f1)
-     echo waitFor $request_id
+    start|stop )
+     request_id=$(ambsrvact "$1" "$2")
+     echo waitFor "$request_id"
      waitFor $request_id
 
     esac
