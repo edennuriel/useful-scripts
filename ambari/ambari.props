@@ -1,16 +1,16 @@
 CLUSTER_NAME=enseclab
 AMBARI_ADMIN_USER=admin
 AMBARI_ADMIN_PASSWORD=admin1234
-AMBARI_HOST=172.26.223.100
-AMBARI_PORT=8444
-AMBARI_BASE_URL="https://${AMBARI_HOST}:${AMBARI_PORT}"
-KDC_HOST=enctrl.field.hortonworks.com
-#todo get the list of hosts from ambari
-REALM=FIELD.HORTONWORKS.COM
 KDC_ADMIN=admin
 KDC_ADMIN_PASS=admin1234
+KDC_HOST=enctrl.field.hortonworks.com
+AMBARI_HOST=172.26.226.244
+AMBARI_PORT=8444
+AMBARI_BASE_URL="https://${AMBARI_HOST}:${AMBARI_PORT}"
+REALM=FIELD.HORTONWORKS.COM
+DOMAINS=field.hortonworks.com
+KDC_TYPE=ipa
 #KERBEROS_CLIENTS=
-
 ##### Notes #####
 #1. KERBEROS_CLIENTS - Comma separated list of Kerberos clients in case of multinode cluster
 #2. Admin princial is admin/admin and password is hadoop

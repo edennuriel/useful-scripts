@@ -7,15 +7,15 @@
 LOC=`pwd`
 PROP=ambari.props
 source $LOC/$PROP
-#AMBARI_VERSION=`rpm -qa|grep 'ambari-server-'|head -1|cut -d'-' -f3`
-#AMBARI_VERSION=${AMBARI_VERSION:-2.7.1}
+source $LOC/ambcli.sh
+AMBARI_VERSION="$(ambget services/AMBARI/components/AMBARI_SERVER?fields=RootServiceComponents/component_version | jq -r '.RootServiceComponents| select (.component_name=="AMBARI_SERVER")|.component_version')"
+export AMBARI_VERSION ; echo $AMBARI_VERSION
 KDC_TYPE="ipa"
 CURLOPTS='-s'
-sleep="echo -> "
-#sleep="sleep "
+#sleep="echo -> "
+sleep="sleep "
 #############
 
-source $LOC/ambcli.sh
 setup_kdc()
 {
 
@@ -107,43 +107,13 @@ create_payload()
 
 configure_kerberos()
 {
-	echo -e "\n`ts` Adding KERBEROS Service to cluster"
-	ambsrv add KERBEROS
-	echo -e "\n`ts` Adding KERBEROS_CLIENT component to the KERBEROS service"
-	$sleep 1
-	ambpost clusters/$CLUSTER_NAME/services/KERBEROS/components/KERBEROS_CLIENT
-	create_payload service
-	$sleep 1
-	ambput clusters/$CLUSTER_NAME  "@$LOC"/payload  
-	echo -e "\n `ts` Creating the KERBEROS_CLIENT host components for each host"
-	for client in `echo $KERBEROS_CLIENTS|tr ',' ' '`;
-	do
-	  ambpost clusters/$CLUSTER_NAME/hosts?Hosts/host_name=$client '{"host_components" : [{"HostRoles" : {"component_name":"KERBEROS_CLIENT"}}]}'
-	  $sleep 1
-	done
-	echo -e "\n`ts` Installing the KERBEROS service and components"
-	ambput clusters/$CLUSTER_NAME/services/KERBEROS '{"ServiceInfo": {"state" : "INSTALLED"}}'
-	echo -e "\n`ts` Sleeping for 1 minute"
-	$sleep 60
-	echo -e "\n`ts` Stopping all the services"
-	ambput clusters/$CLUSTER_NAME/services '{"ServiceInfo": {"state" : "INSTALLED"}}' 
-        echo -e "\n`ts` Sleeping for 3 minutes"
-	$sleep 180
-	if [[ "${AMBARI_VERSION:0:3}" > "2.7" ]] || [[ "${AMBARI_VERSION:0:3}" == "2.7" ]]
-        then
-                echo -e "\n`ts` Uploading Kerberos Credentials"
-                ambpost clusters/$CLUSTER_NAME/credentials/kdc.admin.credential '{ "Credential" : { "principal" : "admin/admin@'$REALM'", "key" : "hadoop", "type" : "temporary" }}' 
-                $sleep 1
-        else
-			echo -e "\n`ts` Ambari post 2.7 version does not allow saving credentials"
-	fi
 	echo -e "\n`ts` Enabling Kerberos"
 	create_payload credentials
 	ambput clusters/$CLUSTER_NAME @$LOC/payload 
 	echo -e "\n`ts` Starting all services after 2 minutes..Please be patient :)"
 	$sleep 120
-	ambput clusters/$CLUSTER_NAME/services  '{"ServiceInfo": {"state" : "STARTED"}}' 
-	echo -e "\n`ts` Please check Ambari UI\nThank You! :)"
+	#ambput clusters/$CLUSTER_NAME/services  '{"ServiceInfo": {"state" : "STARTED"}}' 
+	#echo -e "\n`ts` Please check Ambari UI\nThank You! :)"
 }
 
 [[ ! -z $SETUPKDC ]] && setup_kdc|tee -a $LOC/Kerb_setup.log

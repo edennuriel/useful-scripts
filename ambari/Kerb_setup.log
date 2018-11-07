@@ -1,15 +1,39 @@
 
-2018-11-06,20:02:12 Adding KERBEROS Service to cluster
-{
-  "status" : 409,
-  "message" : "Attempted to create a service which already exists: , clusterName=enseclab serviceName=KERBEROS"
-}
-2018-11-06,20:02:12 Adding KERBEROS_CLIENT component to the KERBEROS service
+2018-11-06,22:53:05 Adding KERBEROS Service to cluster
+HTTP/1.1 201 Created
+Date: Tue, 06 Nov 2018 22:53:05 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node01tzkmk2w9esv3wfge8r7ecsgp77.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 0
+
+
+2018-11-06,22:53:05 Adding KERBEROS_CLIENT component to the KERBEROS service
 -> 1
-{
-  "status" : 409,
-  "message" : "Attempted to create one or more components which already exist:[clusterName=enseclab, serviceName=KERBEROS, componentName=enseclab, desiredState=null, recoveryEnabled=null, componentCategory=null]"
-}[
+HTTP/1.1 201 Created
+Date: Tue, 06 Nov 2018 22:53:05 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node01539au3m5x2v51v0wny01jer0x78.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 0
+
+[
   {
     "Clusters": {
       "desired_config": {
@@ -19,59 +43,7 @@
           "domains":"",
           "manage_krb5_conf": "true",
           "conf_dir":"/etc",
-	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/
-
-[libdefaults]
-  renew_lifetime = 7d
-  forwardable = true
-  default_realm = {{realm}}
-  ticket_lifetime = 24h
-  dns_lookup_realm = false
-  dns_lookup_kdc = false
-  rdns = false
-  dns_canonicalize_hostname = false
-  default_ccache_name = /tmp/krb5cc_%{uid}
-  #default_tgs_enctypes = {{encryption_types}}
-  #default_tkt_enctypes = {{encryption_types}}
-
-{% if domains %}
-[domain_realm]
-{%- for domain in domains.split(',') %}
-  {{domain|trim()}} = {{realm}}
-{%- endfor %}
-{% endif %}
-
-[logging]
-  default = FILE:/var/log/krb5kdc.log
-  admin_server = FILE:/var/log/kadmind.log
-  kdc = FILE:/var/log/krb5kdc.log
-
-[realms]
-  {{realm}} = {
-{%- if master_kdc %}
-    master_kdc = {{master_kdc|trim()}}
-{%- endif -%}
-{%- if kdc_hosts > 0 -%}
-{%- set kdc_host_list = kdc_hosts.split(',')  -%}
-{%- if kdc_host_list and kdc_host_list|length > 0 %}
-    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}
-{%- if kdc_host_list -%}
-{%- if master_kdc and (master_kdc not in kdc_host_list) %}
-    kdc = {{master_kdc|trim()}}
-{%- endif -%}
-{% for kdc_host in kdc_host_list %}
-    kdc = {{kdc_host|trim()}}
-{%- endfor -%}
-{% endif %}
-{%- endif %}
-{%- endif %}
-  kpasswd_server =  {{master_kdc|trim()}}:464
-  default_domain = {{domains.split(',')[0]|trim()}}
-  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem
-  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem
-  }
-
-{# Append additional realm declarations below #}"
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/\n\n[libdefaults]\n  renew_lifetime = 7d\n  forwardable = true\n  default_realm = {{realm}}\n  ticket_lifetime = 24h\n  dns_lookup_realm = false\n  dns_lookup_kdc = false\n  rdns = false\n  dns_canonicalize_hostname = false\n  default_ccache_name = /tmp/krb5cc_%{uid}\n  #default_tgs_enctypes = {{encryption_types}}\n  #default_tkt_enctypes = {{encryption_types}}\n\n{% if domains %}\n[domain_realm]\n{%- for domain in domains.split(',') %}\n  {{domain|trim()}} = {{realm}}\n{%- endfor %}\n{% endif %}\n\n[logging]\n  default = FILE:/var/log/krb5kdc.log\n  admin_server = FILE:/var/log/kadmind.log\n  kdc = FILE:/var/log/krb5kdc.log\n\n[realms]\n  {{realm}} = {\n{%- if master_kdc %}\n    master_kdc = {{master_kdc|trim()}}\n{%- endif -%}\n{%- if kdc_hosts > 0 -%}\n{%- set kdc_host_list = kdc_hosts.split(',')  -%}\n{%- if kdc_host_list and kdc_host_list|length > 0 %}\n    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}\n{%- if kdc_host_list -%}\n{%- if master_kdc and (master_kdc not in kdc_host_list) %}\n    kdc = {{master_kdc|trim()}}\n{%- endif -%}\n{% for kdc_host in kdc_host_list %}\n    kdc = {{kdc_host|trim()}}\n{%- endfor -%}\n{% endif %}\n{%- endif %}\n{%- endif %}\n  kpasswd_server =  {{master_kdc|trim()}}:464\n  default_domain = {{domains.split(',')[0]|trim()}}\n  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem\n  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem\n  }\n\n{# Append additional realm declarations below #}\n"
         }
       }
     }
@@ -105,398 +77,1150 @@
   }
 ]
 -> 1
+HTTP/1.1 100 Continue
 
- 2018-11-06,20:02:12 Creating the KERBEROS_CLIENT host components for each host
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-1-3.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-2-1.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-3-0.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-4-2.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
+HTTP/1.1 500 Internal Server Error
+Date: Tue, 06 Nov 2018 22:53:05 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0gzd6q40lh7vh5buds8weg2h279.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
 
-2018-11-06,20:02:13 Installing the KERBEROS service and components
 {
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/108",
-  "Requests" : {
-    "id" : 108,
-    "status" : "Accepted"
-  }
+  "status" : 500,
+  "message" : "org.apache.ambari.server.controller.spi.SystemException: An internal system exception occurred: Configuration with tag 'version1' exists for 'krb5-conf'"
 }
-2018-11-06,20:02:17 Sleeping for 1 minute
+ 2018-11-06,22:53:05 Creating the KERBEROS_CLIENT host components for each host
+HTTP/1.1 201 Created
+Date: Tue, 06 Nov 2018 22:53:05 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0f0x29auv7j6d1v96ncx1l38pv80.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 0
+
+-> 1
+HTTP/1.1 201 Created
+Date: Tue, 06 Nov 2018 22:53:05 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0vksqxsvbckl27nr1knytf2wk81.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 0
+
+-> 1
+HTTP/1.1 201 Created
+Date: Tue, 06 Nov 2018 22:53:06 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0ye7oesc0q17fjoakplrqvibt82.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 0
+
+-> 1
+HTTP/1.1 201 Created
+Date: Tue, 06 Nov 2018 22:53:09 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node01cm7fful90ltqcnf0zowws7p983.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 0
+
+-> 1
+
+2018-11-06,22:53:12 Installing the KERBEROS service and components
+
+2018-11-06,22:57:52 Adding KERBEROS Service to cluster
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Nov 2018 22:57:52 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0m73xbgeclb861raheesii9v8585.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 409,
+  "message" : "Attempted to create a service which already exists: , clusterName=enseclab serviceName=KERBEROS"
+}
+2018-11-06,22:57:52 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Nov 2018 22:57:52 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0wsokqyva5ayoz2s5lymybhop86.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 409,
+  "message" : "Attempted to create one or more components which already exist:[clusterName=enseclab, serviceName=KERBEROS, componentName=enseclab, desiredState=null, recoveryEnabled=null, componentCategory=null]"
+}[
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "krb5-conf",
+        "tag": "version10",
+        "properties": {
+          "domains":"",
+          "manage_krb5_conf": "true",
+          "conf_dir":"/etc",
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/\n\n[libdefaults]\n  renew_lifetime = 7d\n  forwardable = true\n  default_realm = {{realm}}\n  ticket_lifetime = 24h\n  dns_lookup_realm = false\n  dns_lookup_kdc = false\n  rdns = false\n  dns_canonicalize_hostname = false\n  default_ccache_name = /tmp/krb5cc_%{uid}\n  #default_tgs_enctypes = {{encryption_types}}\n  #default_tkt_enctypes = {{encryption_types}}\n\n{% if domains %}\n[domain_realm]\n{%- for domain in domains.split(',') %}\n  {{domain|trim()}} = {{realm}}\n{%- endfor %}\n{% endif %}\n\n[logging]\n  default = FILE:/var/log/krb5kdc.log\n  admin_server = FILE:/var/log/kadmind.log\n  kdc = FILE:/var/log/krb5kdc.log\n\n[realms]\n  {{realm}} = {\n{%- if master_kdc %}\n    master_kdc = {{master_kdc|trim()}}\n{%- endif -%}\n{%- if kdc_hosts > 0 -%}\n{%- set kdc_host_list = kdc_hosts.split(',')  -%}\n{%- if kdc_host_list and kdc_host_list|length > 0 %}\n    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}\n{%- if kdc_host_list -%}\n{%- if master_kdc and (master_kdc not in kdc_host_list) %}\n    kdc = {{master_kdc|trim()}}\n{%- endif -%}\n{% for kdc_host in kdc_host_list %}\n    kdc = {{kdc_host|trim()}}\n{%- endfor -%}\n{% endif %}\n{%- endif %}\n{%- endif %}\n  kpasswd_server =  {{master_kdc|trim()}}:464\n  default_domain = {{domains.split(',')[0]|trim()}}\n  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem\n  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem\n  }\n\n{# Append additional realm declarations below #}\n"
+        }
+      }
+    }
+  },
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "kerberos-env",
+        "tag": "version1",
+        "properties": {
+          "kdc_type": "ipa",
+          "manage_identities": "true",
+          "install_packages": "true",
+          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
+          "realm" : "FIELD.HORTONWORKS.COM",
+          "kdc_hosts" : "enctrl.field.hortonworks.com",
+          "kdc_host" : "enctrl.field.hortonworks.com",
+          "admin_server_host" : "enctrl.field.hortonworks.com",
+          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
+          "password_length": "20",
+          "password_min_lowercase_letters": "1",
+          "password_min_uppercase_letters": "1",
+          "password_min_digits": "1",
+          "password_min_punctuation": "1",
+          "password_min_whitespace": "0",
+          "service_check_principal_name" : "-",
+          "case_insensitive_username_rules" : "false"
+        }
+      }
+    }
+  }
+]
+-> 1
+HTTP/1.1 100 Continue
+
+HTTP/1.1 500 Internal Server Error
+Date: Tue, 06 Nov 2018 22:57:52 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node0xfgt6mf8rioidnqwap71gwz87.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 500,
+  "message" : "org.apache.ambari.server.controller.spi.SystemException: An internal system exception occurred: Configuration with tag 'version1' exists for 'kerberos-env'"
+}
+ 2018-11-06,22:57:53 Creating the KERBEROS_CLIENT host components for each host
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Nov 2018 22:57:53 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node01shqw8n0zjpmnrkw7tvjkb5he88.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 409,
+  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-7-1-2.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
+}-> 1
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Nov 2018 22:57:53 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node010d8w85hully41jy6s07boed7189.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 409,
+  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-7-2-0.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
+}-> 1
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Nov 2018 22:57:53 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node011ftcra75jiud4g95s0fj1z9o90.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 409,
+  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-7-3-3.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
+}-> 1
+HTTP/1.1 409 Conflict
+Date: Tue, 06 Nov 2018 22:57:53 GMT
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Cache-Control: no-store
+Pragma: no-cache
+Set-Cookie: AMBARISESSIONID=node01c4sy17eswkun16y3h340uffok91.node0;Path=/;Secure;HttpOnly
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+User: admin
+Content-Type: text/plain;charset=utf-8
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+
+{
+  "status" : 409,
+  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-7-4-1.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
+}-> 1
+
+2018-11-06,22:57:53 Installing the KERBEROS service and components
+
+2018-11-07,00:26:10 Adding KERBEROS Service to cluster
+
+2018-11-07,00:26:10 Adding KERBEROS_CLIENT component to the KERBEROS service
+-> 1
+[
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "krb5-conf",
+        "tag": "version10",
+        "properties": {
+          "domains":"",
+          "manage_krb5_conf": "true",
+          "conf_dir":"/etc",
+	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/\n\n[libdefaults]\n  renew_lifetime = 7d\n  forwardable = true\n  default_realm = {{realm}}\n  ticket_lifetime = 24h\n  dns_lookup_realm = false\n  dns_lookup_kdc = false\n  rdns = false\n  dns_canonicalize_hostname = false\n  default_ccache_name = /tmp/krb5cc_%{uid}\n  #default_tgs_enctypes = {{encryption_types}}\n  #default_tkt_enctypes = {{encryption_types}}\n\n{% if domains %}\n[domain_realm]\n{%- for domain in domains.split(',') %}\n  {{domain|trim()}} = {{realm}}\n{%- endfor %}\n{% endif %}\n\n[logging]\n  default = FILE:/var/log/krb5kdc.log\n  admin_server = FILE:/var/log/kadmind.log\n  kdc = FILE:/var/log/krb5kdc.log\n\n[realms]\n  {{realm}} = {\n{%- if master_kdc %}\n    master_kdc = {{master_kdc|trim()}}\n{%- endif -%}\n{%- if kdc_hosts > 0 -%}\n{%- set kdc_host_list = kdc_hosts.split(',')  -%}\n{%- if kdc_host_list and kdc_host_list|length > 0 %}\n    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}\n{%- if kdc_host_list -%}\n{%- if master_kdc and (master_kdc not in kdc_host_list) %}\n    kdc = {{master_kdc|trim()}}\n{%- endif -%}\n{% for kdc_host in kdc_host_list %}\n    kdc = {{kdc_host|trim()}}\n{%- endfor -%}\n{% endif %}\n{%- endif %}\n{%- endif %}\n  kpasswd_server =  {{master_kdc|trim()}}:464\n  default_domain = {{domains.split(',')[0]|trim()}}\n  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem\n  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem\n  }\n\n{# Append additional realm declarations below #}\n"
+        }
+      }
+    }
+  },
+  {
+    "Clusters": {
+      "desired_config": {
+        "type": "kerberos-env",
+        "tag": "version1",
+        "properties": {
+          "kdc_type": "ipa",
+          "manage_identities": "true",
+          "install_packages": "true",
+          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
+          "realm" : "FIELD.HORTONWORKS.COM",
+          "kdc_hosts" : "enctrl.field.hortonworks.com",
+          "kdc_host" : "enctrl.field.hortonworks.com",
+          "admin_server_host" : "enctrl.field.hortonworks.com",
+          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
+          "password_length": "20",
+          "password_min_lowercase_letters": "1",
+          "password_min_uppercase_letters": "1",
+          "password_min_digits": "1",
+          "password_min_punctuation": "1",
+          "password_min_whitespace": "0",
+          "service_check_principal_name" : "-",
+          "case_insensitive_username_rules" : "false"
+        }
+      }
+    }
+  }
+]
+-> 1
+{
+  "resources" : [
+    {
+      "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/configurations/service_config_versions?service_name=KERBEROS&service_config_version=2",
+      "configurations" : [
+        {
+          "clusterName" : "enseclab",
+          "stackId" : {
+            "stackName" : "HDP",
+            "stackVersion" : "3.0",
+            "stackId" : "HDP-3.0"
+          },
+          "type" : "kerberos-env",
+          "versionTag" : "version1",
+          "version" : 1,
+          "serviceConfigVersions" : null,
+          "configs" : {
+            "kdc_type" : "ipa",
+            "password_min_uppercase_letters" : "1",
+            "password_min_whitespace" : "0",
+            "password_min_punctuation" : "1",
+            "password_min_digits" : "1",
+            "encryption_types" : "aes des3-cbc-sha1 rc4 des-cbc-md5",
+            "admin_server_host" : "enctrl.field.hortonworks.com",
+            "password_min_lowercase_letters" : "1",
+            "password_length" : "20",
+            "case_insensitive_username_rules" : "false",
+            "manage_identities" : "true",
+            "kdc_hosts" : "enctrl.field.hortonworks.com",
+            "service_check_principal_name" : "-",
+            "kdc_host" : "enctrl.field.hortonworks.com",
+            "install_packages" : "true",
+            "realm" : "FIELD.HORTONWORKS.COM",
+            "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin"
+          },
+          "configAttributes" : { },
+          "propertiesTypes" : {
+            "KERBEROS_PRINCIPAL" : [
+              "service_check_principal_name"
+            ]
+          }
+        }
+      ],
+      "group_id" : -1,
+      "group_name" : "Default",
+      "service_config_version" : 2,
+      "service_config_version_note" : null,
+      "service_name" : "KERBEROS"
+    }
+  ]
+}
+ 2018-11-07,00:26:11 Creating the KERBEROS_CLIENT host components for each host
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/hosts?Hosts/host_name=enseclab-7-1-2.field.hortonworks.com",
+  "items" : [ ]
+}-> 1
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/hosts?Hosts/host_name=enseclab-7-2-0.field.hortonworks.com",
+  "items" : [ ]
+}-> 1
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/hosts?Hosts/host_name=enseclab-7-3-3.field.hortonworks.com",
+  "items" : [ ]
+}-> 1
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/hosts?Hosts/host_name=enseclab-7-4-1.field.hortonworks.com",
+  "items" : [ ]
+}-> 1
+
+2018-11-07,00:26:12 Installing the KERBEROS service and components
+
+2018-11-07,00:29:52 Sleeping for 1 minute
 -> 60
 
-2018-11-06,20:02:17 Stopping all the services
+2018-11-07,00:29:52 Stopping all the services
 {
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/109",
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/14",
   "Requests" : {
-    "id" : 109,
+    "id" : 14,
     "status" : "Accepted"
   }
 }
-2018-11-06,20:02:23 Sleeping for 3 minutes
+2018-11-07,00:30:03 Sleeping for 3 minutes
 -> 180
 
-2018-11-06,20:02:23 Ambari post 2.7 version does not allow saving credentials
+2018-11-07,00:30:03 Ambari post 2.7 version does not allow saving credentials
 
-2018-11-06,20:02:23 Enabling Kerberos
+2018-11-07,00:30:03 Enabling Kerberos
 {
   "session_attributes" : {
     "kerberos_admin" : {
-      "principal" : "admin/admin",
-      "password" : "hadoop"
+      "principal" : "admin",
+      "password" : "admin1234"
     }
   },
   "Clusters": {
     "security_type" : "KERBEROS"
   }
 }
-
-2018-11-06,20:02:23 Starting all services after 2 minutes..Please be patient :)
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:30:03 Starting all services after 2 minutes..Please be patient :)
 -> 120
 {
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/110",
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/15",
   "Requests" : {
-    "id" : 110,
+    "id" : 15,
     "status" : "Accepted"
   }
 }
-2018-11-06,20:02:40 Please check Ambari UI
+2018-11-07,00:30:09 Please check Ambari UI
 Thank You! :)
 
-2018-11-06,20:04:20 Adding KERBEROS Service to cluster
-{
-  "status" : 409,
-  "message" : "Attempted to create a service which already exists: , clusterName=enseclab serviceName=KERBEROS"
-}
-2018-11-06,20:04:20 Adding KERBEROS_CLIENT component to the KERBEROS service
--> 1
-{
-  "status" : 409,
-  "message" : "Attempted to create one or more components which already exist:[clusterName=enseclab, serviceName=KERBEROS, componentName=enseclab, desiredState=null, recoveryEnabled=null, componentCategory=null]"
-}[
-  {
-    "Clusters": {
-      "desired_config": {
-        "type": "krb5-conf",
-        "tag": "version1",
-        "properties": {
-          "domains":"",
-          "manage_krb5_conf": "true",
-          "conf_dir":"/etc",
-	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/
-
-[libdefaults]
-  renew_lifetime = 7d
-  forwardable = true
-  default_realm = {{realm}}
-  ticket_lifetime = 24h
-  dns_lookup_realm = false
-  dns_lookup_kdc = false
-  rdns = false
-  dns_canonicalize_hostname = false
-  default_ccache_name = /tmp/krb5cc_%{uid}
-  #default_tgs_enctypes = {{encryption_types}}
-  #default_tkt_enctypes = {{encryption_types}}
-
-{% if domains %}
-[domain_realm]
-{%- for domain in domains.split(',') %}
-  {{domain|trim()}} = {{realm}}
-{%- endfor %}
-{% endif %}
-
-[logging]
-  default = FILE:/var/log/krb5kdc.log
-  admin_server = FILE:/var/log/kadmind.log
-  kdc = FILE:/var/log/krb5kdc.log
-
-[realms]
-  {{realm}} = {
-{%- if master_kdc %}
-    master_kdc = {{master_kdc|trim()}}
-{%- endif -%}
-{%- if kdc_hosts > 0 -%}
-{%- set kdc_host_list = kdc_hosts.split(',')  -%}
-{%- if kdc_host_list and kdc_host_list|length > 0 %}
-    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}
-{%- if kdc_host_list -%}
-{%- if master_kdc and (master_kdc not in kdc_host_list) %}
-    kdc = {{master_kdc|trim()}}
-{%- endif -%}
-{% for kdc_host in kdc_host_list %}
-    kdc = {{kdc_host|trim()}}
-{%- endfor -%}
-{% endif %}
-{%- endif %}
-{%- endif %}
-  kpasswd_server =  {{master_kdc|trim()}}:464
-  default_domain = {{domains.split(',')[0]|trim()}}
-  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem
-  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem
-  }
-
-{# Append additional realm declarations below #}"
-        }
-      }
-    }
-  },
-  {
-    "Clusters": {
-      "desired_config": {
-        "type": "kerberos-env",
-        "tag": "version1",
-        "properties": {
-          "kdc_type": "ipa",
-          "manage_identities": "true",
-          "install_packages": "true",
-          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
-          "realm" : "FIELD.HORTONWORKS.COM",
-          "kdc_hosts" : "enctrl.field.hortonworks.com",
-          "kdc_host" : "enctrl.field.hortonworks.com",
-          "admin_server_host" : "enctrl.field.hortonworks.com",
-          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
-          "password_length": "20",
-          "password_min_lowercase_letters": "1",
-          "password_min_uppercase_letters": "1",
-          "password_min_digits": "1",
-          "password_min_punctuation": "1",
-          "password_min_whitespace": "0",
-          "service_check_principal_name" : "-",
-          "case_insensitive_username_rules" : "false"
-        }
-      }
-    }
-  }
-]
--> 1
-
- 2018-11-06,20:04:20 Creating the KERBEROS_CLIENT host components for each host
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-1-3.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-2-1.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-3-0.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-4-2.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-
-2018-11-06,20:04:20 Installing the KERBEROS service and components
-{
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/111",
-  "Requests" : {
-    "id" : 111,
-    "status" : "Accepted"
-  }
-}
-2018-11-06,20:04:25 Sleeping for 1 minute
+2018-11-07,00:34:11 Sleeping for 1 minute
 -> 60
 
-2018-11-06,20:04:25 Stopping all the services
-{
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/112",
-  "Requests" : {
-    "id" : 112,
-    "status" : "Accepted"
-  }
-}
-2018-11-06,20:04:30 Sleeping for 3 minutes
+2018-11-07,00:34:11 Stopping all the services
+
+2018-11-07,00:34:11 Sleeping for 3 minutes
 -> 180
 
-2018-11-06,20:04:30 Ambari post 2.7 version does not allow saving credentials
+2018-11-07,00:34:11 Ambari post 2.7 version does not allow saving credentials
 
-2018-11-06,20:04:30 Enabling Kerberos
+2018-11-07,00:34:11 Enabling Kerberos
 {
   "session_attributes" : {
     "kerberos_admin" : {
-      "principal" : "admin/admin",
-      "password" : "hadoop"
+      "principal" : "admin",
+      "password" : "admin1234"
     }
   },
   "Clusters": {
     "security_type" : "KERBEROS"
   }
 }
-
-2018-11-06,20:04:30 Starting all services after 2 minutes..Please be patient :)
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:34:11 Starting all services after 2 minutes..Please be patient :)
 -> 120
 {
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/113",
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/18",
   "Requests" : {
-    "id" : 113,
+    "id" : 18,
     "status" : "Accepted"
   }
 }
-2018-11-06,20:04:49 Please check Ambari UI
+2018-11-07,00:34:23 Please check Ambari UI
 Thank You! :)
 
-2018-11-06,20:11:38 Adding KERBEROS Service to cluster
-{
-  "status" : 409,
-  "message" : "Attempted to create a service which already exists: , clusterName=enseclab serviceName=KERBEROS"
-}
-2018-11-06,20:11:38 Adding KERBEROS_CLIENT component to the KERBEROS service
--> 1
-{
-  "status" : 409,
-  "message" : "Attempted to create one or more components which already exist:[clusterName=enseclab, serviceName=KERBEROS, componentName=enseclab, desiredState=null, recoveryEnabled=null, componentCategory=null]"
-}[
-  {
-    "Clusters": {
-      "desired_config": {
-        "type": "krb5-conf",
-        "tag": "version1",
-        "properties": {
-          "domains":"",
-          "manage_krb5_conf": "true",
-          "conf_dir":"/etc",
-	  "content" : "includedir /var/lib/sss/pubconf/krb5.include.d/
-
-[libdefaults]
-  renew_lifetime = 7d
-  forwardable = true
-  default_realm = {{realm}}
-  ticket_lifetime = 24h
-  dns_lookup_realm = false
-  dns_lookup_kdc = false
-  rdns = false
-  dns_canonicalize_hostname = false
-  default_ccache_name = /tmp/krb5cc_%{uid}
-  #default_tgs_enctypes = {{encryption_types}}
-  #default_tkt_enctypes = {{encryption_types}}
-
-{% if domains %}
-[domain_realm]
-{%- for domain in domains.split(',') %}
-  {{domain|trim()}} = {{realm}}
-{%- endfor %}
-{% endif %}
-
-[logging]
-  default = FILE:/var/log/krb5kdc.log
-  admin_server = FILE:/var/log/kadmind.log
-  kdc = FILE:/var/log/krb5kdc.log
-
-[realms]
-  {{realm}} = {
-{%- if master_kdc %}
-    master_kdc = {{master_kdc|trim()}}
-{%- endif -%}
-{%- if kdc_hosts > 0 -%}
-{%- set kdc_host_list = kdc_hosts.split(',')  -%}
-{%- if kdc_host_list and kdc_host_list|length > 0 %}
-    admin_server = {{admin_server_host|default(kdc_host_list[0]|trim(), True)}}
-{%- if kdc_host_list -%}
-{%- if master_kdc and (master_kdc not in kdc_host_list) %}
-    kdc = {{master_kdc|trim()}}
-{%- endif -%}
-{% for kdc_host in kdc_host_list %}
-    kdc = {{kdc_host|trim()}}
-{%- endfor -%}
-{% endif %}
-{%- endif %}
-{%- endif %}
-  kpasswd_server =  {{master_kdc|trim()}}:464
-  default_domain = {{domains.split(',')[0]|trim()}}
-  pkinit_anchors = FILE:/var/lib/ipa-client/pki/kdc-ca-bundle.pem
-  pkinit_pool = FILE:/var/lib/ipa-client/pki/ca-bundle.pem
-  }
-
-{# Append additional realm declarations below #}"
-        }
-      }
-    }
-  },
-  {
-    "Clusters": {
-      "desired_config": {
-        "type": "kerberos-env",
-        "tag": "version1",
-        "properties": {
-          "kdc_type": "ipa",
-          "manage_identities": "true",
-          "install_packages": "true",
-          "encryption_types": "aes des3-cbc-sha1 rc4 des-cbc-md5",
-          "realm" : "FIELD.HORTONWORKS.COM",
-          "kdc_hosts" : "enctrl.field.hortonworks.com",
-          "kdc_host" : "enctrl.field.hortonworks.com",
-          "admin_server_host" : "enctrl.field.hortonworks.com",
-          "executable_search_paths" : "/usr/bin, /usr/kerberos/bin, /usr/sbin, /usr/lib/mit/bin, /usr/lib/mit/sbin",
-          "password_length": "20",
-          "password_min_lowercase_letters": "1",
-          "password_min_uppercase_letters": "1",
-          "password_min_digits": "1",
-          "password_min_punctuation": "1",
-          "password_min_whitespace": "0",
-          "service_check_principal_name" : "-",
-          "case_insensitive_username_rules" : "false"
-        }
-      }
-    }
-  }
-]
--> 1
-
- 2018-11-06,20:11:38 Creating the KERBEROS_CLIENT host components for each host
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-1-3.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-2-1.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-3-0.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-{
-  "status" : 409,
-  "message" : "org.apache.ambari.server.controller.spi.ResourceAlreadyExistsException: Attempted to create a host_component which already exists: [clusterName=enseclab, hostName=enseclab-6-4-2.field.hortonworks.com, componentName=KERBEROS_CLIENT]"
-}-> 1
-
-2018-11-06,20:11:39 Installing the KERBEROS service and components
-{
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/114",
-  "Requests" : {
-    "id" : 114,
-    "status" : "Accepted"
-  }
-}
-2018-11-06,20:11:43 Sleeping for 1 minute
+2018-11-07,00:34:57 Sleeping for 1 minute
 -> 60
 
-2018-11-06,20:11:43 Stopping all the services
+2018-11-07,00:34:57 Stopping all the services
+
+2018-11-07,00:34:57 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:34:57 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:34:57 Enabling Kerberos
 {
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/115",
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:34:57 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:36:27 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:36:27 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HDFS, componentName=NAMENODE, hostname=enseclab-8-2-0.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:36:27 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:36:27 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:36:27 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:36:27 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:36:41 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:36:41 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HDFS, componentName=NAMENODE, hostname=enseclab-8-2-0.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:36:42 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:36:42 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:36:42 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:36:42 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:38:02 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:38:02 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=YARN, componentName=TIMELINE_READER, hostname=enseclab-8-2-0.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:38:03 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:38:03 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:38:03 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:38:03 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:38:35 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:38:35 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HIVE, componentName=HIVE_METASTORE, hostname=enseclab-8-3-1.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:38:35 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:38:35 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:38:35 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:38:35 Starting all services after 2 minutes..Please be patient :)
+-> 120
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/29",
   "Requests" : {
-    "id" : 115,
+    "id" : 29,
     "status" : "Accepted"
   }
 }
-2018-11-06,20:11:49 Sleeping for 3 minutes
+2018-11-07,00:38:40 Please check Ambari UI
+Thank You! :)
+
+2018-11-07,00:39:39 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:39:39 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HIVE, componentName=HIVE_SERVER, hostname=enseclab-8-3-1.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:39:40 Sleeping for 3 minutes
 -> 180
 
-2018-11-06,20:11:49 Ambari post 2.7 version does not allow saving credentials
+2018-11-07,00:39:40 Ambari post 2.7 version does not allow saving credentials
 
-2018-11-06,20:11:49 Enabling Kerberos
+2018-11-07,00:39:40 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:39:40 Starting all services after 2 minutes..Please be patient :)
+-> 120
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/31",
+  "Requests" : {
+    "id" : 31,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,00:39:43 Please check Ambari UI
+Thank You! :)
+
+2018-11-07,00:41:36 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:41:36 Stopping all the services
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/33",
+  "Requests" : {
+    "id" : 33,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,00:41:49 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:41:49 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:41:49 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:41:49 Starting all services after 2 minutes..Please be patient :)
+-> 120
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/34",
+  "Requests" : {
+    "id" : 34,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,00:41:55 Please check Ambari UI
+Thank You! :)
+
+2018-11-07,00:43:33 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:43:33 Stopping all the services
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/36",
+  "Requests" : {
+    "id" : 36,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,00:43:40 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:43:40 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:43:40 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:43:40 Starting all services after 2 minutes..Please be patient :)
+-> 120
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HIVE, componentName=HIVE_METASTORE, hostname=enseclab-8-3-1.field.hortonworks.com, currentState=STOPPING, newDesiredState=STARTED"
+}
+2018-11-07,00:43:40 Please check Ambari UI
+Thank You! :)
+
+2018-11-07,00:45:10 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:45:10 Stopping all the services
+
+2018-11-07,00:45:10 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:45:10 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:45:10 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:45:10 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:46:43 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:46:43 Stopping all the services
+
+2018-11-07,00:47:13 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:47:13 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HDFS, componentName=NAMENODE, hostname=enseclab-8-1-2.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:47:13 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:47:13 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:47:13 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:47:13 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:48:33 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:48:33 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HDFS, componentName=NAMENODE, hostname=enseclab-8-1-2.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:48:33 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:48:33 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:48:33 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:48:33 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:49:27 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:49:27 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HBASE, componentName=HBASE_MASTER, hostname=enseclab-8-4-3.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:49:27 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:49:27 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:49:27 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:49:28 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:49:46 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:49:46 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=YARN, componentName=TIMELINE_READER, hostname=enseclab-8-2-0.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,00:49:46 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:49:46 Ambari post 2.7 version does not allow saving credentials
+
+2018-11-07,00:49:46 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:49:46 Starting all services after 2 minutes..Please be patient :)
+-> 120
+
+2018-11-07,00:57:18 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:57:18 Stopping all the services
+
+2018-11-07,00:58:53 Sleeping for 1 minute
+-> 60
+
+2018-11-07,00:58:53 Stopping all the services
+
+2018-11-07,00:58:53 Sleeping for 3 minutes
+-> 180
+
+2018-11-07,00:58:53 Uploading Kerberos Credentials
+{
+  "status" : 400,
+  "message" : "Invalid Request: Malformed Request Body.  An exception occurred parsing the request body: Unexpected character ('@' (code 64)): was expecting comma to separate OBJECT entries\n at [Source: java.io.StringReader@3525a813; line: 1, column: 43]"
+}-> 1
+
+2018-11-07,00:58:53 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,00:58:54 Starting all services after 2 minutes..Please be patient :)
+-> 120
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/54",
+  "Requests" : {
+    "id" : 54,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,00:59:08 Please check Ambari UI
+Thank You! :)
+
+2018-11-07,00:59:39 Sleeping for 1 minute
+
+2018-11-07,01:00:39 Stopping all the services
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid transition for servicecomponenthost, clusterName=enseclab, clusterId=2, serviceName=HDFS, componentName=NAMENODE, hostname=enseclab-8-2-0.field.hortonworks.com, currentState=STARTING, newDesiredState=INSTALLED"
+}
+2018-11-07,01:00:39 Sleeping for 3 minutes
+
+2018-11-07,01:03:39 Uploading Kerberos Credentials
+{
+  "status" : 400,
+  "message" : "Invalid Request: Malformed Request Body.  An exception occurred parsing the request body: Unexpected character ('@' (code 64)): was expecting comma to separate OBJECT entries\n at [Source: java.io.StringReader@752fef95; line: 1, column: 43]"
+}
+2018-11-07,01:03:40 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,01:03:40 Starting all services after 2 minutes..Please be patient :)
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/56",
+  "Requests" : {
+    "id" : 56,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,01:05:43 Please check Ambari UI
+Thank You! :)
+
+2018-11-07,01:06:36 Sleeping for 1 minute
+
+2018-11-07,01:07:18 Sleeping for 1 minute
+
+2018-11-07,01:07:19 Stopping all the services
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/59",
+  "Requests" : {
+    "id" : 59,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,01:07:26 Sleeping for 3 minutes
+
+2018-11-07,01:10:26 Uploading Kerberos Credentials
+{
+  "status" : 400,
+  "message" : "Invalid Request: Malformed Request Body.  An exception occurred parsing the request body: Unexpected character ('@' (code 64)): was expecting comma to separate OBJECT entries\n at [Source: java.io.StringReader@5cc6ca95; line: 1, column: 43]"
+}
+2018-11-07,01:10:27 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Missing KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,01:10:27 Starting all services after 2 minutes..Please be patient :)
+
+2018-11-07,04:15:13 Uploading Kerberos Credentials
+
+2018-11-07,04:15:14 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST (or PUT for updating) to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,04:15:15 Starting all services after 2 minutes..Please be patient :)
+
+2018-11-07,04:17:26 Uploading Kerberos Credentials
+{
+  "status" : 500,
+  "message" : "An internal system exception occurred: A credential with the alias of kdc.admin.credential already exists"
+}
+2018-11-07,04:17:27 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST (or PUT for updating) to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,04:17:28 Starting all services after 2 minutes..Please be patient :)
+
+2018-11-07,04:18:32 Uploading Kerberos Credentials
+{
+  "status" : 500,
+  "message" : "An internal system exception occurred: A credential with the alias of kdc.admin.credential already exists"
+}
+2018-11-07,04:18:33 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "status" : 400,
+  "message" : "java.lang.IllegalArgumentException: Invalid KDC administrator credentials.\nThe KDC administrator credentials must be set as a persisted or temporary credential resource.This may be done by issuing a POST (or PUT for updating) to the /api/v1/clusters/:clusterName/credentials/kdc.admin.credential API entry point with the following payload:\n{\n  \"Credential\" : {\n    \"principal\" : \"(PRINCIPAL)\", \"key\" : \"(PASSWORD)\", \"type\" : \"(persisted|temporary)\"}\n  }\n}"
+}
+2018-11-07,04:18:34 Starting all services after 2 minutes..Please be patient :)
+
+2018-11-07,04:19:55 Uploading Kerberos Credentials
+
+2018-11-07,04:19:57 Enabling Kerberos
+{
+  "session_attributes" : {
+    "kerberos_admin" : {
+      "principal" : "admin",
+      "password" : "admin1234"
+    }
+  },
+  "Clusters": {
+    "security_type" : "KERBEROS"
+  }
+}
+{
+  "href" : "https://172.26.226.244:8444/api/v1/clusters/enseclab/requests/60",
+  "Requests" : {
+    "id" : 60,
+    "status" : "Accepted"
+  }
+}
+2018-11-07,04:19:59 Starting all services after 2 minutes..Please be patient :)
+
+2018-11-07,05:31:13 Enabling Kerberos
 {
   "session_attributes" : {
     "kerberos_admin" : {
@@ -509,14 +1233,4 @@ Thank You! :)
   }
 }
 
-2018-11-06,20:11:49 Starting all services after 2 minutes..Please be patient :)
--> 120
-{
-  "href" : "https://172.26.223.100:8444/api/v1/clusters/enseclab/requests/116",
-  "Requests" : {
-    "id" : 116,
-    "status" : "Accepted"
-  }
-}
-2018-11-06,20:12:09 Please check Ambari UI
-Thank You! :)
+2018-11-07,05:31:13 Starting all services after 2 minutes..Please be patient :)
